@@ -3,7 +3,7 @@ ParseRailsBoilerplate::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"  
   
   get "sign_up" => "users#new", :as => "sign_up"  
-  root :to => "users#new"  
+  root :to => "welcome#index"  
   resources :users  
   resources :sessions 
 end
