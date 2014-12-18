@@ -261,9 +261,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         
-                        <% if current_user %>  
+                        <% if current_user.id %>  
 						    
-						<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+						<li><a href="/profile"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
 						<li class="divider"></li>
                         <li><a href="<%= log_out_path %>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
@@ -408,11 +408,11 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/js/plugins/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
+    <!-- Morris Charts JavaScript
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/js/plugins/morris/raphael.min.js"></script>
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/js/plugins/morris/morris.min.js"></script>
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/js/plugins/morris/morris-data.js"></script>
-
+ -->
     <!-- Custom Theme JavaScript -->
     <script src="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/js/sb-admin-2.js"></script>
 </body>

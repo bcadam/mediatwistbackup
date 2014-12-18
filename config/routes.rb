@@ -4,6 +4,10 @@ ParseRailsBoilerplate::Application.routes.draw do
   
   get "sign_up" => "users#new", :as => "sign_up"  
   root :to => "welcome#index"  
+
+  get "profile" => "users#profile"
+
+
   resources :users  
   resources :sessions 
 end
