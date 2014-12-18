@@ -16,7 +16,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'parse_resource', :git => 'git@github.com:adelevie/parse_resource.git'
+gem 'parse_resource', '~> 1.8.0'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
