@@ -1,19 +1,20 @@
-class UsersController < ApplicationController
+class SitesController < ApplicationController
   def new  
-    @user = User.new  
+    @site = Site.new  
   end  
     
   def create  
-    @user = User.new(params[:user])  
-    if @user.save  
+    @site = Site.new(params[:site])  
+    if @site.save  
       redirect_to root_url, :notice => "Signed up!"  
     else  
       render "new"  
     end  
   end
 
-  def profile
+  def index
     @user = current_user
     @sites = Site.where(:userid => @user.id)
   end
+
 end

@@ -6,8 +6,9 @@ ParseRailsBoilerplate::Application.routes.draw do
   root :to => "welcome#index"  
 
   get "profile" => "users#profile"
-
+  get "index" => "welcome#index"  
 
   resources :users  
   resources :sessions 
+  resources :sites
 end
