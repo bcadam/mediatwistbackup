@@ -11,7 +11,7 @@ ParseRailsBoilerplate::Application.routes.draw do
 
   get "add_site" => "sites#new", :as => "add_site" 
 
-  #get "/sites/:id" => "sites#show"
+  get "/site/:id" => "sites#show"
 
   resources :users  
   resources :sessions 

@@ -261,6 +261,7 @@
                 </li>-->
 
                 <!-- /.dropdown -->
+                <% if current_user %>
                 <li class="">
                     <a href="/sites/new">
                         <i class="fa fa-plus fa-fw"></i> Add site
@@ -271,6 +272,7 @@
                         <i class="fa fa-sitemap fa-fw"></i> Sites
                     </a>
                 </li>
+                <% end %>
 
 
                 <!-- /.dropdown -->
@@ -280,7 +282,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         
-                        <% if current_user.id %>  
+                        <% if current_user %>  
 						    
 						<li><a href="/profile"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
