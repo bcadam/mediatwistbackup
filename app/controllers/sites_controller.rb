@@ -4,13 +4,34 @@ class SitesController < ApplicationController
   end  
     
   def create  
-    @site = Site.new(params[:site].merge(:userid => current_user.id) )
+
+    @site = Site.new()
+    @site.title = params[:site][:title]
+    @site.url = params[:site][:url]
+    @site.body = params[:site][:body]
+    @site.userid = current_user.id
+
+
+    
+    f = params[:site][:image]
+
+    #@site.imageinfo = f
+
+    result = Site.upload( f.tempfile, f.original_filename)
+    @site.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
     if @site.save
-      redirect_to "/profile", :notice => "Signed up!"  
+      
+      redirect_to "/sites", :notice => ( @site.title + " created!" )
+      #redirect_to "/sites", :notice => imageArray
+
     else  
+      
       render "new"  
+    
     end  
+
+
   end
 
   def index
@@ -20,6 +41,7 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
+
   end
 
 

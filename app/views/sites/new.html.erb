@@ -1,8 +1,8 @@
+<div class="row">
 
-            <div class="row">
-                <div class="col-lg-12">
+<div class="col-lg-12">
 
- <h1>Add site</h1>  
+<h1>Add site</h1>  
   
 <%= form_for @site do |f| %>  
   <% if @site.errors.any? %>  
@@ -26,12 +26,13 @@
   <p>  
     <%= f.label :Body %><br /> 
     <%= f.text_field :body %>  
-  </p>  
+  </p>
+  <p>  
+    <%= f.label :Image %><br /> 
+    <%= f.file_field :image %>  
+  </p> 
   <%= f.submit :class => "btn btn-success btn-lg" %> 
-<% end %>                  </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-     
-   
- 
+<% end %>
+
+</div>
+</div>
