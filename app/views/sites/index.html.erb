@@ -1,3 +1,15 @@
 <% for site in @sites %> 
-Test
-<% end %>
+<div class="col-md-3 col-sm-6 hero-feature">
+    <div class="thumbnail">
+        <img src="http://placehold.it/800x500" alt="">
+        <div class="caption">
+
+            <h3><%= link_to site.title , site.url %></h3>
+            <p><%= site.body %></p>
+            <p>
+            <a href="<%= "/site/" + site.id %>" class="btn btn-primary">Buy Now!</a>
+            </p>
+        </div>
+    </div>
+</div>
+<%end%>

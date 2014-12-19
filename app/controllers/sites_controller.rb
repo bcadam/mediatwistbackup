@@ -4,9 +4,10 @@ class SitesController < ApplicationController
   end  
     
   def create  
-    @site = Site.new(params[:site])  
-    if @site.save  
-      redirect_to root_url, :notice => "Signed up!"  
+    @site = Site.new(params[:site].merge(:userid => current_user.id) )
+
+    if @site.save
+      redirect_to "/profile", :notice => "Signed up!"  
     else  
       render "new"  
     end  
@@ -17,4 +18,8 @@ class SitesController < ApplicationController
     @sites = Site.where(:userid => @user.id)
   end
 
+  def show
+  end
+
+  
 end
