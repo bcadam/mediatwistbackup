@@ -10,8 +10,6 @@ class SitesController < ApplicationController
     @site.url = params[:site][:url]
     @site.body = params[:site][:body]
     @site.userid = current_user.id
-
-
     
     f = params[:site][:image]
 
@@ -31,16 +29,20 @@ class SitesController < ApplicationController
     
     end  
 
-
   end
 
   def index
     @user = current_user
+    
     @sites = Site.where(:userid => @user.id)
   end
 
   def show
     @site = Site.find(params[:id])
+
+    @bassets = Basset.where(:siteid => @site.id)
+
+    @basset = Basset.new
 
   end
 
