@@ -8,47 +8,42 @@ $(".list-group-item").onhover.addclass("active");
 </div>
 
 <div class="row">
-
-<%= form_for @basset do |f| %>
-
+<%= form_for @basset do |f| %>  
   <% if @basset.errors.any? %>  
     <div class="error_messages">  
       <h2>Form is invalid</h2>  
       <ul>  
-        <% for message in @site.errors.full_messages %>  
+        <% for message in @basset.errors.full_messages %>  
           <li><%= message %></li>  
         <% end %>  
       </ul>  
     </div>  
   <% end %>  
   <p>  
-    <%= f.label :Name %><br />  
+    <%= f.label :name %><br />  
     <%= f.text_field :name %>  
   </p>  
+<%= f.hidden_field :siteid, :value => @site.id %>
+
   <p>  
     <%= f.label :Image %><br /> 
     <%= f.file_field :image %>  
   </p> 
-  <div style="display:none">
-  <input name="_method" type="hidden" value="patch" />
-  <input name="siteid" type="hidden" value="<%= @site.id %>" />
-  </div>
-  <%= f.submit :class => "btn btn-success btn-lg" %>
+  <%= f.submit :class => "btn btn-success btn-lg" %> 
 <% end %>
 
 
 </div>
 
 
-
-
+        
 
     <div class="row">
     <div class="well">
-        <h4 class="text-center">Page Assets</h4>
+        <h4 class="text-center">New Assets</h4>
         <div class="list-group">
           <% for imageBasset in @bassets %> 
-          <a href="<%= imageBasset %>" class="list-group-item">
+          <a href="<%= "/bassets/" + imageBasset.id %>" class="list-group-item">
                 <div class="media col-md-3">
                     <figure class="pull-left">
                         <img class="media-object img-rounded img-responsive"  src="<%= imageBasset.image %>" alt="placehold.it/350x250" >
@@ -56,8 +51,7 @@ $(".list-group-item").onhover.addclass("active");
                 </div>
                 <div class="col-md-6">
                     <h4 class="list-group-item-heading"> <%= imageBasset.name %> </h4>
-                    <p class="list-group-item-text"> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. 
-                        Vel et nonumy gubergren, ad has tota facilis probatus. Ea legere legimus tibique cum, sale tantas vim ea, eu vivendo expetendis vim. Voluptua vituperatoribus et mel, ius no elitr deserunt mediocrem. Mea facilisi torquatos ad.
+                    <p class="list-group-item-text"><%= imageBasset.tags %>
                     </p>
                 </div>
                 <div class="col-md-3 text-center">
@@ -78,6 +72,17 @@ $(".list-group-item").onhover.addclass("active");
         </div>
         </div>
   </div>
+
+
+<div class="row">
+        <h4 class="text-center">Current Assets</h4>
+          <% for imageasset in @site.siteassets %> 
+          <%= image_tag imageasset, :class => "col col-md-2" %>
+          <%end%>
+
+  </div>
+
+
 <style>
 a.list-group-item {
     height:auto;

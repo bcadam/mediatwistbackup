@@ -8,7 +8,7 @@ class BassetsController < ApplicationController
 
     @basset = Basset.new()
     @basset.name = params[:basset][:name]
-    @basset.siteid = current_user.id
+    @basset.siteid = params[:basset][:siteid]
 
     
     f = params[:basset][:image]
@@ -20,7 +20,7 @@ class BassetsController < ApplicationController
 
       if @basset.save
         
-        redirect_to "/sites", :notice => ( @basset.name + " created!" )
+        redirect_to "/sites/" + @basset.siteid, :notice => ( @basset.name + " created!" )
         #redirect_to "/sites", :notice => imageArray
 
       else  

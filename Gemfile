@@ -19,6 +19,9 @@ gem 'jquery-rails'
 gem 'parse_resource', '~> 1.8.0'
 
 
+gem 'nokogiri', '~> 1.6.5'
+gem 'metainspector'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
