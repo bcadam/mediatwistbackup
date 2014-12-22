@@ -17,13 +17,15 @@ class SitesController < ApplicationController
         @currentimages = MetaInspector.new(@site.url)
         @currentimages = @currentimages.images
 
-        @test = []
+        @arrayofimageurls = []
         $i = 0
         count = 0
         while $i < @currentimages.length  do
-          @test.push(@currentimages[$i])
+          @arrayofimageurls.push(@currentimages[$i])
           $i +=1 
         end
+
+        
 
         @site.siteassets = @test
         ##end of fetching site assets
@@ -63,31 +65,8 @@ class SitesController < ApplicationController
 
   def getpage
 
-        require 'nokogiri'
-        require 'open-uri'
-
-        @array = params[:q]
-        #require 'net/http'
-        #@source = Net::HTTP.get('stackoverflow.com', '/index.html')
-
-        #doc = Nokogiri::HTML(open('http://ironsummitmedia.github.io/startbootstrap-agency/'))
-        #@avatar = doc.css('img').collect(&:to_s)
-
-        #@count = 0
-        #doc.css('img').each do |link|
-         # @count = @count + 1
-        #end
-
-        @avatar = MetaInspector.new('http://google.com')
-        @avatar = @avatar.images
-
-        @test = []
-        $i = 0
-        count = 0
-        while $i < @avatar.length  do
-          @test.push(@avatar[$i])
-          $i +=1 
-        end
+        @array = params[:id]
+    
 
 
 

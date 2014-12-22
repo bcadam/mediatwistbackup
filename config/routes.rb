@@ -23,6 +23,6 @@ ParseRailsBoilerplate::Application.routes.draw do
   resources :sessions 
   resources :sites
 
-  get "sites:id" => "sites#getpage"
+  get "getpage:id" => "sites#getpage"
   
 end
