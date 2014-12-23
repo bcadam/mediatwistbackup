@@ -18,6 +18,7 @@ class SitesController < ApplicationController
         @currentimages = @currentimages.images
 
         @arrayofimageurls = []
+        
         $i = 0
         count = 0
         while $i < @currentimages.length  do
@@ -25,9 +26,9 @@ class SitesController < ApplicationController
           $i +=1 
         end
 
-        
 
-        @site.siteassets = @test
+
+        @site.siteassets = @arrayofimageurls
         ##end of fetching site assets
 
 
@@ -36,6 +37,26 @@ class SitesController < ApplicationController
         @site.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
         if @site.save
+
+
+          $i = 0
+          count = 0
+          while $i < @site.siteassets.length  do
+            @basset = Basset.new()
+            @basset.name = "Asset " + $i.to_s
+            @basset.siteid = @site.id
+
+        
+            f = open(@site.siteassets[$i])
+
+            result = Site.upload( f, @basset.name)
+            @basset.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
+
+            @basset.save
+        
+            $i +=1 
+
+          end
           
           redirect_to "/sites", :notice => ( @site.title + " created!" )
           #redirect_to "/sites", :notice => imageArray
@@ -65,12 +86,34 @@ class SitesController < ApplicationController
 
   def getpage
 
-        @array = params[:id]
+        require 'net/http'
+        require "open-uri"
+
+        #gather parameters from the url to indicate what the user is after
+        #@searchparams = params[:id]
+        
+        #remove the leading q= from google url
+        #@searchparams = @searchparams.gsub("&q=","")
+        
+        #take the search parameters into an array to facilitate matching
+        #@searchparams = @searchparams.split(' ').collect! {|n| n.to_s}
+
+        
+        # @basset = Basset.new()
+        # @basset.name = "name"
+        # @basset.siteid = "asdfasdf"
+
     
+        # f = open("http://startbootstrap.com/assets/img/templates/agency.jpg")
 
+        # #@site.imageinfo = f
 
+        # result = Site.upload( f, "name")
+        # @basset.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
-
+        # @basset.save
+          
+        
 
   end
 

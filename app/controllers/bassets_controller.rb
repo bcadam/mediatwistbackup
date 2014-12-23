@@ -18,14 +18,14 @@ class BassetsController < ApplicationController
     result = Site.upload( f.tempfile, f.original_filename)
     @basset.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
-      if @basset.save
-        
-        redirect_to "/sites/" + @basset.siteid, :notice => ( @basset.name + " created!" )
-        #redirect_to "/sites", :notice => imageArray
-
-      else  
+    if @basset.save
       
-      render "new"  
+      redirect_to "/sites/" + @basset.siteid, :notice => ( @basset.name + " created!" )
+      #redirect_to "/sites", :notice => imageArray
+
+    else  
+    
+    render "new"  
     
     end  
 
