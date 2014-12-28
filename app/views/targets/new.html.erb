@@ -1,0 +1,30 @@
+<div class="row">
+
+<div class="col-lg-12">
+
+<h1>Add target</h1>  
+  
+<%= form_for @target do |f| %>  
+  <% if @target.errors.any? %>  
+    <div class="error_messages">  
+      <h2>Form is invalid</h2>  
+      <ul>  
+        <% for message in @target.errors.full_messages %>  
+          <li><%= message %></li>  
+        <% end %>  
+      </ul>  
+    </div>  
+  <% end %>
+  <p>  
+    <%= f.label :siteid %><br /> 
+    <%= f.text_field :siteid %>  
+  </p> 
+  <p>  
+    <%= f.label :url %><br /> 
+    <%= f.text_field :url %>  
+  </p> 
+  <%= f.submit :class => "btn btn-success btn-lg" %> 
+<% end %>
+
+</div>
+</div>

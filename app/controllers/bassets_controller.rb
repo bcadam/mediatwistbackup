@@ -20,7 +20,7 @@ class BassetsController < ApplicationController
 
     if @basset.save
       
-      redirect_to "/sites/" + @basset.siteid, :notice => ( @basset.name + " created!" )
+      redirect_to "/sites/" + @basset.siteid.to_s , :notice => ( @basset.name + " created!" )
       #redirect_to "/sites", :notice => imageArray
 
     else  
@@ -31,6 +31,12 @@ class BassetsController < ApplicationController
 
 
   end
+
+  def edit
+    @basset = Basset.find(params[:id])
+    
+  end
+
 
   def index
     @bassets = Basset.all

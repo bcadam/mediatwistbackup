@@ -6,6 +6,7 @@ $(".list-group-item").onhover.addclass("active");
 <h3><%= @site.title %></h3>
 <%= @site.body %>
 </div>
+<%= @site.siteassets %>
 
 <div class="row">
 <%= form_for @basset do |f| %>  
@@ -78,7 +79,7 @@ $(".list-group-item").onhover.addclass("active");
         <h4 class="text-center">Current Assets</h4>
           <%# for imageasset in @site.siteassets %> 
           <%#= image_tag imageasset, :class => "col col-md-2" %>
-          <%#end%>
+          <%# end%>
 
   </div> -->
 

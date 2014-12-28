@@ -71,6 +71,7 @@ GEM
       faraday_middleware (~> 0.9.1)
       nokogiri (~> 1.6)
     mime-types (1.18)
+    mini_magick (4.0.1)
     mini_portile (0.6.1)
     multi_json (1.2.0)
     multipart-post (2.0.0)
@@ -145,6 +146,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   jquery-rails
   metainspector
+  mini_magick
   nokogiri (~> 1.6.5)
   parse_resource (~> 1.8.0)
   rails (= 3.1.3)
