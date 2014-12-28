@@ -17,15 +17,10 @@ class SitesController < ApplicationController
         
 
         ##goes to current site and gets all of the links
-        @currentimages = MetaInspector.new(@site.url)
-        @site.siteassets = @currentimages.images
+        sitescrape = MetaInspector.new(@site.url)
+        @site.siteassets = sitescrape.images
 
         @arrayofimageurls = []
-
-        #   # @target = Target.new()
-        #   # @target.siteid = @site.id
-        #   # @target.url = @currentimages[$i]
-        #   # @target.save
 
         #takes the uploaded file and places it on Parse.com
 
@@ -52,12 +47,12 @@ class SitesController < ApplicationController
             @basset.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
 
-            image = MiniMagick::Image.open(@basset.image)
+            image = MiniMagick::Image.open(@site.siteassets[$i].to_s)
 
             @target = Target.new()
             @target.siteid = @site.id
-            @target.height = image.height
-            @target.width = image.width
+            @target.height = image[:height].to_s
+            @target.width = image[:width].to_s
             @target.url = @site.siteassets[$i]
             @target.save
 
