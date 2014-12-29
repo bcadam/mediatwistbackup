@@ -47,12 +47,12 @@ class SitesController < ApplicationController
             @basset.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
 
-            image = MiniMagick::Image.open(@site.siteassets[$i].to_s)
+            #image = MiniMagick::Image.open(@site.siteassets[$i].to_s)
 
             @target = Target.new()
             @target.siteid = @site.id
-            @target.height = image[:height].to_s
-            @target.width = image[:width].to_s
+            #@target.height = image[:height].to_s
+            #@target.width = image[:width].to_s
             @target.url = @site.siteassets[$i]
             @target.save
 
@@ -84,6 +84,7 @@ class SitesController < ApplicationController
         @site = Site.find(params[:id])
 
         @bassets = Basset.where(:siteid => @site.id)
+        @targets = Target.where(:siteid => @site.id)
 
         @basset = Basset.new
 

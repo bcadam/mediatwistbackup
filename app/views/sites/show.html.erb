@@ -5,43 +5,42 @@ $(".list-group-item").onhover.addclass("active");
 <%= image_tag @site.image, :class => "col-md-3 col-xs-6" %>
 <h3><%= @site.title %></h3>
 <%= @site.body %>
-</div>
-<%= @site.siteassets %>
+</div><br />
+<%#= @site.siteassets %>
 
 <div class="row">
+<h4 class="text-center">New Assets</h4>
 <%= form_for @basset do |f| %>  
-  <% if @basset.errors.any? %>  
-    <div class="error_messages">  
-      <h2>Form is invalid</h2>  
-      <ul>  
-        <% for message in @basset.errors.full_messages %>  
-          <li><%= message %></li>  
-        <% end %>  
-      </ul>  
-    </div>  
-  <% end %>  
+<div class="col col-lg-6"> 
   <p>  
-    <%= f.label :name %><br />  
+    <%= f.label :name %> 
     <%= f.text_field :name %>  
   </p>  
 <%= f.hidden_field :siteid, :value => @site.id %>
-
   <p>  
-    <%= f.label :Image %><br /> 
+    <%= f.label :Image %>
     <%= f.file_field :image %>  
   </p> 
-  <%= f.submit :class => "btn btn-success btn-lg" %> 
+  </div>
+  <div class="col col-lg-6">
+  <%= f.submit :class => "btn btn-success btn-lg col-lg-12" %> 
+  </div>
 <% end %>
-
-
 </div>
 
-
+<div class="row well">
+<h4 class="text-center">Target Locations</h4>
+<% for target in @targets %>
+<div class="list-group">
+<%= target.url %>
+</div>
+<% end %>
+</div>
         
 
     <div class="row">
     <div class="well">
-        <h4 class="text-center">New Assets</h4>
+        <h4 class="text-center">Site Assets</h4>
         <div class="list-group">
           <% for imageBasset in @bassets %> 
           <a href="<%= "/bassets/" + imageBasset.id %>" class="list-group-item">
