@@ -13,9 +13,14 @@ ParseRailsBoilerplate::Application.routes.draw do
 
 
   get "getpage" => "sites#getpage"
+
+  get "mediatwist" => "twister#mediatwist"
+  
   #get "/site/:id" => "sites#show"
 
   #post "/asset/create" => "assets#create"
+
+  get "admin" => "admin#index"
 
 
   resources :bassets

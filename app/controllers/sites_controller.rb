@@ -6,6 +6,7 @@ class SitesController < ApplicationController
   def create 
         require 'open-uri'
         require 'mini_magick'
+        require 'fastimage'
 
 
         @site = Site.new()
@@ -13,8 +14,6 @@ class SitesController < ApplicationController
         @site.url = params[:site][:url]
         @site.body = params[:site][:body]
         @site.userid = current_user.id
-        
-        
 
         ##goes to current site and gets all of the links
         sitescrape = MetaInspector.new(@site.url)
@@ -25,8 +24,6 @@ class SitesController < ApplicationController
         #takes the uploaded file and places it on Parse.com
 
         f = params[:site][:image]
-
-        #@site.imageinfo = f
 
         result = Site.upload( f.tempfile, f.original_filename)
         @site.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
@@ -40,23 +37,20 @@ class SitesController < ApplicationController
             @basset = Basset.new()
             @basset.name = "Asset " + $i.to_s
             @basset.siteid = @site.id
+            @basset.published = true
 
             f = open(@site.siteassets[$i])
 
             result = Site.upload( f, @basset.name )
             @basset.image = {"name" => result["name"], "__type" => "File", "url" => result["url"]}
 
-
-            #image = MiniMagick::Image.open(@site.siteassets[$i].to_s)
-
             @target = Target.new()
             @target.siteid = @site.id
-            #@target.height = image[:height].to_s
-            #@target.width = image[:width].to_s
             @target.url = @site.siteassets[$i]
+            @target.width = FastImage.size(@target.url)[0]
+            @target.height = FastImage.size(@target.url)[1]
+            @target.published = true
             @target.save
-
-
 
             @basset.save
         
@@ -81,6 +75,7 @@ class SitesController < ApplicationController
   end
 
   def show
+    
         @site = Site.find(params[:id])
 
         @bassets = Basset.where(:siteid => @site.id)

@@ -22,6 +22,7 @@ gem 'parse_resource', '~> 1.8.0'
 gem 'nokogiri', '~> 1.6.5'
 gem 'metainspector'
 gem 'mini_magick'
+gem 'fastimage'
 
 
 gem 'rails_12factor', group: :production

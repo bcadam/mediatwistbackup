@@ -1,86 +1,228 @@
+<style>
+/*
+Fade content bs-carousel with hero headers
+Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
+Image credits: unsplash.com
+*/
+
+/********************************/
+/*       Fade Bs-carousel       */
+/********************************/
+
+.fade-carousel {
+    position: relative;
+    height: 20vh;
+}
+.fade-carousel .carousel-inner .item {
+    height: 20vh;
+}
+.fade-carousel .carousel-indicators > li {
+    margin: 0 2px;
+    background-color: #f39c12;
+    border-color: #f39c12;
+    opacity: .7;
+}
+.fade-carousel .carousel-indicators > li.active {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+/********************************/
+/*          Hero Headers        */
+/********************************/
+.hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+      -webkit-transform: translate3d(-50%,-50%,0);
+         -moz-transform: translate3d(-50%,-50%,0);
+          -ms-transform: translate3d(-50%,-50%,0);
+           -o-transform: translate3d(-50%,-50%,0);
+              transform: translate3d(-50%,-50%,0);
+}
+.hero h1 {
+    font-size: 6em;    
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.fade-carousel .carousel-inner .item .hero {
+    opacity: 0;
+    -webkit-transition: 2s all ease-in-out .1s;
+       -moz-transition: 2s all ease-in-out .1s; 
+        -ms-transition: 2s all ease-in-out .1s; 
+         -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s; 
+}
+.fade-carousel .carousel-inner .item.active .hero {
+    opacity: 1;
+    -webkit-transition: 2s all ease-in-out .1s;
+       -moz-transition: 2s all ease-in-out .1s; 
+        -ms-transition: 2s all ease-in-out .1s; 
+         -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s;    
+}
+
+/********************************/
+/*            Overlay           */
+/********************************/
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #080d15;
+    opacity: .7;
+}
+
+/********************************/
+/*          Custom Buttons      */
+/********************************/
+.btn.btn-lg {padding: 10px 40px;}
+.btn.btn-hero,
+.btn.btn-hero:hover,
+.btn.btn-hero:focus {
+    color: #f5f5f5;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+    outline: none;
+    margin: 20px auto;
+}
+
+/********************************/
+/*       Slides backgrounds     */
+/********************************/
+.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-2,
+.fade-carousel .slides .slide-3 {
+  height: 20vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.fade-carousel .slides .slide-1 {
+  background-image: url(<%= @site.image %>);
+ /*  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);*/
+}
+
+
+</style>
+<div class="carousel fade-carousel slide" data-interval="4000" id="bs-carousel">
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="slide-1"></div>
+      <div class="hero">
+        <hgroup>
+            <h1><%#= @site.title %></h1>        
+            <h3><!-- put subtitle you want in overlay here --></h3>
+        </hgroup>
+        <!-- <button class="btn btn-hero btn-lg" role="button">put title you want in overlay here </button>-->
+      </div>
+    </div>
+  </div> 
+  </div>
+<br />
+
 <script>
 $(".list-group-item").onhover.addclass("active");
 </script>
-<div class="row">
-<%= image_tag @site.image, :class => "col-md-3 col-xs-6" %>
-<h3><%= @site.title %></h3>
-<%= @site.body %>
-</div><br />
-<%#= @site.siteassets %>
+
 
 <div class="row">
+<div class="col-lg-5 well well-sm">
 <h4 class="text-center">New Assets</h4>
 <%= form_for @basset do |f| %>  
-<div class="col col-lg-6"> 
-  <p>  
-    <%= f.label :name %> 
-    <%= f.text_field :name %>  
+<div class="col"> 
+  <p class="col col-lg-12">  
+    <%#= f.label :name %> 
+    <%= f.text_field :name, :class=>"col col-lg-12", :placeholder => 'Asset Name' %>  
   </p>  
 <%= f.hidden_field :siteid, :value => @site.id %>
-  <p>  
-    <%= f.label :Image %>
-    <%= f.file_field :image %>  
+  <p class="col col-lg-12">  
+    <%#= f.label :Image %>
+    <%= f.file_field :image, :class=>"col col-lg-12" %>  
+  </p> 
+  <p class="col col-lg-12">  
+    <%#= f.label :tags %>
+    <%= f.text_field :tags, :class=>"col col-lg-12", :placeholder => '["Tags","Tags","Cats"]'  %>  
   </p> 
   </div>
-  <div class="col col-lg-6">
+  <p class="col col-lg-12">  
   <%= f.submit :class => "btn btn-success btn-lg col-lg-12" %> 
-  </div>
 <% end %>
-</div>
+ </div>
 
-<div class="row well">
-<h4 class="text-center">Target Locations</h4>
-<% for target in @targets %>
-<div class="list-group">
-<%= target.url %>
-</div>
-<% end %>
+
+
+<div class=" well-sm well col col-lg-5 col-lg-offset-2">
+  <h4 class="text-center">Target Locations</h4>
+  <% for target in @targets %>
+      <%= image_tag "http://placehold.it/" + target.width.to_s + "x" + target.height.to_s, :class =>"list-group col col-lg-3" %>
+      <!--<div class="col col-lg-3">
+      <%#= target.width %>
+      </div>
+      <div class="col col-lg-3">
+      <%#= target.height %>
+      </div>-->
+  <% end %>
 </div>
         
+ </div>  
+<style>
 
-    <div class="row">
-    <div class="well">
-        <h4 class="text-center">Site Assets</h4>
-        <div class="list-group">
-          <% for imageBasset in @bassets %> 
-          <a href="<%= "/bassets/" + imageBasset.id %>" class="list-group-item">
-                <div class="media col-md-3">
-                    <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive"  src="<%= imageBasset.image %>" alt="placehold.it/350x250" >
-                    </figure>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="list-group-item-heading"> <%= imageBasset.name %> </h4>
-                    <p class="list-group-item-text"><%= imageBasset.tags %>
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <h2> 14240 <small> votes </small></h2>
-                    <button type="button" class="btn btn-default btn-lg btn-block"> Vote Now! </button>
-                    <div class="stars">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </div>
-                    <p> Average 4.5 <small> / </small> 5 </p>
-                </div>
-          </a>
-          <%end%>
+.glyphicon { margin-right:5px;}
+.section-box h2 { margin-top:0px;}
+.section-box h2 a { font-size:15px; }
+.glyphicon-heart { color:#e74c3c;}
+.glyphicon-comment { color:#27ae60;}
+.separator { padding-right:5px;padding-left:5px; }
+.section-box hr {margin-top: 0;margin-bottom: 5px;border: 0;border-top: 1px solid rgb(199, 199, 199);}
+</style>
 
+
+<div class="row">
+<% for basset in @bassets %>
+    <div class="col-md-6">
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-xs-3 col-md-3 text-center">
+                    <img src="<%= basset.image %>" class="img-rounded img-responsive" />
+                </div>
+                <div class="col-xs-9 col-md-9 section-box">
+                    <h2><%= basset.name %></h2>
+                    <p>
+                        Design elements, playground and code snippets for Bootstrap HTML/CSS/JS framework</p>
+                    <!--<hr />
+                    <div class="row rating-desc">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-heart"></span><span class="glyphicon glyphicon-heart">
+                            </span><span class="glyphicon glyphicon-heart"></span><span class="glyphicon glyphicon-heart">
+                            </span><span class="glyphicon glyphicon-heart"></span>(36)<span class="separator">|</span>
+                            <span class="glyphicon glyphicon-comment"></span>(100 Comments)
+                        </div>
+                    </div>-->
+                </div>
+            </div>
         </div>
-        </div>
-  </div>
+    </div>
+<% end %>
+</div>
 
-
-<!-- <div class="row">
-        <h4 class="text-center">Current Assets</h4>
-          <%# for imageasset in @site.siteassets %> 
-          <%#= image_tag imageasset, :class => "col col-md-2" %>
-          <%# end%>
-
-  </div> -->
 
 
 <style>
